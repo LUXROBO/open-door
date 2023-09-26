@@ -32,12 +32,11 @@ function App() {
 
   return (
     <div className="container" onClick={toggleClassName}>
-      header
       <div className={isActive ? "door active" : "door"} id="door1">
         <div className="grid-item-interior">
           <img
             className="inner-background"
-            src="/assets/bg.jpg"
+            src="/assets/bg.png"
             alt="background"
           />
         </div>
