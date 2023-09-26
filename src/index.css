@@ -1,13 +1,84 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  text-decoration: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  height: 100vh;
+}
+
+.grid-item-interior {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  background-color: #ecf0f1;
+  background-image: url("https://www.transparenttextures.com/patterns/lined-paper.png");
+
+  box-shadow: inset 0px 0px 20px 5px rgba(41, 41, 41, 0.4);
+}
+
+.inner-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.door {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.left,
+.right {
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+  position: absolute;
+  transition:
+    all 0.5s ease-in-out,
+    border 0.1s ease;
+  border-left: 0.0625em solid rgba(28, 28, 28, 0.5);
+}
+
+.right {
+  top: 0;
+  right: 0;
+}
+
+.left {
+  top: 0;
+  left: 0;
+}
+#door1 .left,
+#door1 .right {
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.6) repeat center center;
+}
+
+#door1.active .left {
+  transform: translateX(-100%);
+}
+
+#door1.active .right {
+  transform: translateX(100%);
 }
