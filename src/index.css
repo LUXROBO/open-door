@@ -55,8 +55,10 @@ body {
   display: inline-block;
   position: absolute;
   transition:
-    all 0.5s ease-in-out,
-    border 0.1s ease;
+    all 1.5s ease-in-out,
+    border 0.5s ease;
+    /* all 0.5s ease-in-out,
+    border 0.1s ease; */
   border-left: 0.0625em solid rgba(28, 28, 28, 0.5);
 }
 
