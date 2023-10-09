@@ -4,7 +4,7 @@ import useInterval from 'use-interval';
 
 import { OnePassPoll } from 'OnePass';
 
-const onePassPollTime = 1000;
+const onePassPollTime = 200;    // 200ms
 const onePassBgList = [
   '/assets/HillState_bg1.png',
   '/assets/HillState_bg2.png',
