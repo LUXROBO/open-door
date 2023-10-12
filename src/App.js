@@ -1,42 +1,48 @@
 import { useEffect, useState } from "react";
+import moment from 'moment';
+import useInterval from 'use-interval';
+
+import { OnePassPoll } from 'OnePass';
+
+const onePassPollTime = 200;    // 200ms
+const onePassBgList = [
+  '/assets/HillState_bg1.png',
+  '/assets/HillState_bg2.png',
+  '/assets/HillState_bg3.png',
+  '/assets/HillState_bg4.png',
+  '/assets/HillState_bg5.png',
+  '/assets/HillState_bg6.png',
+]
 
 function App() {
-  const [isActive, setIsActive] = useState(false);
-
-  const toggleClassName = () => {
-    setIsActive((prevIsActive) => !prevIsActive);
-  };
+  const [isOpen, setOpen] = useState(false);
+  const [bgFile, setBgFile] = useState(onePassBgList[0]);
 
   useEffect(() => {
-    const socket = new WebSocket(
-      "wss://dev-notification.luxrobo.com/notification/subscriptions",
-    );
+    const time = moment().format('YYYY-MM-DD hh:mm:ss')
+    console.log(`App starting... ${time}`)
 
-    socket.addEventListener("open", (event) => {
-      console.log("소켓 연결됨");
-    });
-
-    socket.addEventListener("close", (event) => {
-      console.log("소켓 연결 해제됨");
-    });
-
-    socket.addEventListener("message", (event) => {
-      console.log("서버로부터의 메시지:", event.data);
-      toggleClassName();
-    });
-
-    return () => {
-      socket.close();
-    };
   }, []);
 
+
+  useInterval(async () => {
+    let entered = await OnePassPoll()
+
+    if (entered) {
+      const index = Math.floor(Math.random() * 100) % onePassBgList.length;
+      setBgFile(onePassBgList[index]);
+      setTimeout(() => setOpen(true), 500);
+      setTimeout(() => setOpen(false), 5000);     
+    }
+  }, onePassPollTime)
+
   return (
-    <div className="container" onClick={toggleClassName}>
-      <div className={isActive ? "door active" : "door"} id="door1">
+    <div className="container">
+      <div className={isOpen ? "door active" : "door"} id="door1">
         <div className="grid-item-interior">
           <img
             className="inner-background"
-            src="/assets/bg.png"
+            src={bgFile}
             alt="background"
           />
         </div>
